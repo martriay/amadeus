@@ -1,8 +1,8 @@
 import Data.Char
 
-------------------
--- Definiciones --
-------------------
+-----------
+-- Notas --
+-----------
 
 -- Returns a set of notes depending on its congruence with 12
 -- Devuelve un set de notas dependiendo de su congruencia con 12, lo que determina si funciona con sostenidos o bemoles 
@@ -34,32 +34,30 @@ nota n
 
 -- Calculates the ionan mode basic structure
 -- Calcula la estructura basica del modo jonico
-estructura :: [Int]
-estructura = scanl (+) 0 base
-  where base = [tono, tono, semitono, tono, tono, tono]
-        semitono = 1
+escala :: [Int]
+escala = scanl (+) 0 [tono, tono, semitono, tono, tono, tono]
+  where semitono = 1
         tono = 2
 
--------------------
--- Funcionalidad --
--------------------
+-------------
+-- Escalas --
+-------------
 
 -- Returns a set of notes depending on its tonal center, modificating the particular case of Gb which breaks everything
 -- Devuelve un set de notas dependiendo del centro tonal, modificando el caso particular de Solb para que no repita nombres de notas
 tonalidad :: Int -> [[Char]]
-tonalidad x = [ cycle (notas x) !! ((caso n) + x) | n <- estructura ]
+tonalidad x = [ cycle (notas x) !! ((caso n) + x) | n <- escala ]
   where caso n
           | x == 6 && n == 5 = 6
           | otherwise = n
 
--- Shifts a tonality setting the key note on "y"
--- Se corre una tonalidad hasta colocar el centro tonal en "y"
--- el modo "x" debe correr la tonalidad tantas posiciones como valor haya en el indice "x" de "estructura"
-escala :: Int -> Int -> [[Char]]
-escala x y = [ cycle (tonalidad $ y + 12 - (estructura !! x)) !! (n + x) | n <- [0..6] ]
-
+-- Shifts a tonality setting the key note on "b"
+-- Se corre una tonalidad hasta colocar el centro tonal en "b"
+-- el modo "a" debe correr la tonalidad tantas posiciones como valor haya en el indice "a" de "escala"
 modo :: Int -> [Char] -> [[Char]]
-modo n x = escala n (nota x)
+modo a b = [ cycle corrimiento !! (n + a) | n <- [0..6] ]
+  where corrimiento = tonalidad $ c + 12 - (escala !! a)
+        c = nota b
 
 jonico    = modo 0
 dorico    = modo 1
@@ -71,3 +69,5 @@ locrio    = modo 6
 
 mayor = jonico
 menor = eolico
+
+acordes x = [ [cycle x !! (n+e)| n<-[0,2,4]] | e <- [0..6] ]
