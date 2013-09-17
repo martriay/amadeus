@@ -13,7 +13,7 @@ notas x = [ n !! caso | n <- todas ]
           | elem (mod x 12) [2,4,7,9,11] = 0
           | otherwise = 1
 
--- Maps every note with its numeric equivalent
+-- Maps every note to its numeric equivalent
 -- Mapea cada nota con su equivalente numerico
 nota :: [Char] -> Int
 nota n
@@ -70,4 +70,14 @@ locrio    = modo 6
 mayor = jonico
 menor = eolico
 
-acordes x = [ [cycle x !! (n+e)| n<-[0,2,4]] | e <- [0..6] ]
+-------------
+-- Acordes --
+-------------
+
+estructura :: Int -> [Int]
+estructura n = take n [0,2..]
+
+-- Takes a scale and builds its basic chords
+-- Construye los acordes basicos de una escala dada
+acordes x = [ triada e | e <- [0..6] ]
+  where triada e = [ cycle x !! (n+e) | n <- estructura 3 ]
