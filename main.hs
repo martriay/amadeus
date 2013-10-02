@@ -8,9 +8,9 @@ import Data.Char
 -- Devuelve un set de notas dependiendo de su congruencia con 12, lo que determina si funciona con sostenidos o bemoles 
 notas :: Int -> [[Char]]
 notas x = [ n !! caso | n <- todas ]
-  where todas = [["Do","Do"],["Do#","Reb"],["Re","Re"],["Re#","Mib"],["Mi","Mi"],["Fa","Fa"],["Fa#","Solb"],["Sol","Sol"],["Sol#","Lab"],["La","La"],["La#","Sib"],["Si","Si"]]
+  where todas = [["Do","Do"],["Do#","Reb"],["Re","Re"],["Re#","Mib"],["Mi","Mi"],["Fa","Fa"],["Fa#","Solb"],["Sol","Sol"],["Sol#","Lab"],["La","La"],["La#","Sib"],["Si","Dob"]]
         caso
-          | elem (mod x 12) [2,4,7,9,11] = 0
+          | elem (mod x 12) [0,2,4,7,9,11] = 0
           | otherwise = 1
 
 -- Maps every note to its numeric equivalent
