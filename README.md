@@ -19,4 +19,4 @@ Ok, modules loaded: Main
 ["Re#","Mi","Fa#","Sol#","La","Si","Do#"]
 
 ```
-Works with latin notation (Do, Re, Mi, etc) and suppors the following modes: `jonico` (also works with `mayor`), `dorico`, `frigio`, `lidio`, `mixolidio`, `eolico` (also works with `menor`), `locrio`
+Works with latin notation (Do, Re, Mi, etc) and supports the following modes: `jonico` (also works with `mayor`), `dorico`, `frigio`, `lidio`, `mixolidio`, `eolico` (also works with `menor`), `locrio`
